@@ -1,0 +1,32 @@
+{
+  "name": "e-com",
+  "version": "1.0.0",
+  "description": "mern e-commerce app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tahasin007/mern-e-commerce-app.git"
+  },
+  "author": "Tahasin Mahmud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tahasin007/mern-e-commerce-app/issues"
+  },
+  "homepage": "https://github.com/tahasin007/mern-e-commerce-app#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.9"
+  }
+}
