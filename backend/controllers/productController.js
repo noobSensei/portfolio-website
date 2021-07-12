@@ -1,6 +1,5 @@
 import Product from '../models/productModel.js'
 import asyncHandler from 'express-async-handler'
-import mongoose from 'mongoose'
 
 //@description fetch all products
 //@route GET /api/products
@@ -14,9 +13,7 @@ const getProducts = asyncHandler(async(req, res) =>{
 //@route GET /api/products/:id
 //@access public
 const getProductById = asyncHandler(async (req, res) => {
-  const prductId = mongoose.Types.ObjectId(req.params.id)
-  const product = await Product.findById(prductId)
-
+  const product = await Product.findById(req.params.id)
   if (product) {
     res.json(product)
   } else {

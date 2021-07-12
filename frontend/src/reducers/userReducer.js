@@ -35,6 +35,8 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
       return { loading: false, user: action.payload }
     case actions.USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
+    case actions.USER_DETAILS_RESET:
+      return { user: {} }
     default:
       return state
   }
@@ -45,7 +47,7 @@ export const userUpdateProfileReducer = (state = {}, action) => {
     case actions.USER_UPDATE_PROFILE_REQUEST:
       return { ...state, loading: true }
     case actions.USER_UPDATE_PROFILE_SUCCESS:
-      return { loading: false, success:true, userInfo: action.payload }
+      return { loading: false, success: true, userInfo: action.payload }
     case actions.USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload }
     default:
