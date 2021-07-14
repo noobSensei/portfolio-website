@@ -3,7 +3,9 @@ import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import 'font-awesome/css/font-awesome.min.css'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import {logout} from '../actions/userActions'
+import { logout } from '../actions/userActions'
+import SearchBox from './SearchBox'
+import { Route } from 'react-router-dom'
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin)
@@ -11,8 +13,8 @@ const Header = () => {
 
   const dispatch = useDispatch()
 
-  const logoutHandler = () =>{
-      dispatch(logout())
+  const logoutHandler = () => {
+    dispatch(logout())
   }
   return (
     <header>
@@ -27,6 +29,7 @@ const Header = () => {
             id='basic-navbar-nav'
             className='justify-content-end'
           >
+            <Route render={({history})=> <SearchBox history={history}/>}/>
             <Nav className='mr-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

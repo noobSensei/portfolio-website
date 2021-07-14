@@ -11,9 +11,12 @@ import {
 } from '../actions/orderActions'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from '../constants/orderConstants'
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const [sdkReady, setSdkReady] = useState(false)
 
   const orderId = match.params.id
@@ -46,6 +49,10 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
+
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       const script = document.createElement('script')
@@ -68,9 +75,9 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true)
       }
     }
-  }, [dispatch, orderId, successPay, order, successDeliver])
+  }, [dispatch, orderId, successPay, order, successDeliver, history, userInfo])
 
-  const deliverHandler = () =>{
+  const deliverHandler = () => {
     dispatch(deliverOrder(order))
   }
   return loading ? (
@@ -198,18 +205,21 @@ const OrderScreen = ({ match }) => {
                   )}
                 </ListGroup.Item>
               )}
-              {loadingDeliver && <Loader/>}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                <ListGroup.Item>
-                  <Button
-                    type='button'
-                    className='btn w-100'
-                    onClick={deliverHandler}
-                  >
-                    Mark As Delivered
-                  </Button>
-                </ListGroup.Item>
-              )}
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type='button'
+                      className='btn w-100'
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
