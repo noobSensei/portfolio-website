@@ -16,7 +16,7 @@ const app = express()
 
 app.use(express.json())
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
@@ -29,9 +29,9 @@ const corsOptions = {
   optionSuccessStatus: 200,
 }
 
-app.get('/', (req, res) => {
-  res.send('API is runnig')
-})
+// app.get('/', (req, res) => {
+//   res.send('API is runnig')
+// })
 
 app.use('/api/products', cors(corsOptions), productRoutes)
 app.use('/api/users', cors(corsOptions), userRoutes)
@@ -48,6 +48,18 @@ app.use(
   cors(corsOptions),
   express.static(path.join(__dirname, '/uploads'))
 )
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is runnig')
+  })
+}
 
 app.use(notFound)
 

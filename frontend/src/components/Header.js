@@ -29,7 +29,7 @@ const Header = () => {
             id='basic-navbar-nav'
             className='justify-content-end'
           >
-            <Route render={({history})=> <SearchBox history={history}/>}/>
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='mr-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

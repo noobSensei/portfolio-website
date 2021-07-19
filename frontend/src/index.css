@@ -27,23 +27,35 @@ h2 {
   display: flex;
 }
 
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: rgb(94, 90, 91);
+}
+
 .carousel-caption {
   position: absolute;
   top: 0;
 }
 
-.carousel-caption h2 {
-  color: #fff;
+.carousel-caption h5 {
+  color: #000;
 }
 
-.carousel img {
-  height: 300px;
-  padding: 30px;
-  margin: 40px;
-  border-radius: 5%;
-  margin-left: auto;
-  margin-right: auto;
+/* .carousel-inner{
+  width:100%;
   align-items: center;
+  justify-content: center;
+} */
+
+.carousel img {
+  max-height: 35%;
+  max-width: 50%;
+  /* padding: 30px;
+  margin: 40px; */
+  margin-left:auto ;
+  margin-right:auto;
+  object-fit: cover;
+  border-radius: 5%;
 }
 
 .carousel a {
@@ -54,4 +66,11 @@ h2 {
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
+}
+
+.card-img-top{
+  height: 10rem;
+}
+.card-body{
+  height: 10rem;
 }
